@@ -14,10 +14,6 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _keymaster = require('keymaster');
-
-var _keymaster2 = _interopRequireDefault(_keymaster);
-
 var _Store = require('./Store');
 
 var _Store2 = _interopRequireDefault(_Store);
@@ -34,6 +30,10 @@ var _Constants = require('./Constants');
 
 var _Constants2 = _interopRequireDefault(_Constants);
 
+var _Keymaster = require('./Keymaster');
+
+var _Keymaster2 = _interopRequireDefault(_Keymaster);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -42,7 +42,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var defaultKeyFilter = _keymaster2.default.filter;
+var defaultKeyFilter = _Keymaster2.default.filter;
 
 var Store = new _Store2.default();
 var hasClass = function hasClass(element, className) {
@@ -54,8 +54,8 @@ var hasClass = function hasClass(element, className) {
 };
 
 var handleClose = function handleClose() {
-    _keymaster2.default.deleteScope('react-popup');
-    _keymaster2.default.filter = defaultKeyFilter;
+    _Keymaster2.default.deleteScope('react-popup');
+    _Keymaster2.default.filter = defaultKeyFilter;
 
     Store.close();
 };
@@ -224,8 +224,8 @@ var Component = function (_React$Component) {
     }, {
         key: 'componentWillUnmount',
         value: function componentWillUnmount() {
-            _keymaster2.default.deleteScope('react-popup');
-            _keymaster2.default.filter = defaultKeyFilter;
+            _Keymaster2.default.deleteScope('react-popup');
+            _Keymaster2.default.filter = defaultKeyFilter;
         }
 
         /**
@@ -248,8 +248,8 @@ var Component = function (_React$Component) {
     }, {
         key: 'onClose',
         value: function onClose() {
-            _keymaster2.default.deleteScope('react-popup');
-            _keymaster2.default.filter = defaultKeyFilter;
+            _Keymaster2.default.deleteScope('react-popup');
+            _Keymaster2.default.filter = defaultKeyFilter;
 
             this.setState(initialState);
         }
@@ -264,9 +264,9 @@ var Component = function (_React$Component) {
         value: function onShow(id) {
             var _this2 = this;
 
-            _keymaster2.default.deleteScope('react-popup');
+            _Keymaster2.default.deleteScope('react-popup');
 
-            _keymaster2.default.filter = function () {
+            _Keymaster2.default.filter = function () {
                 return true;
             };
 
@@ -291,10 +291,10 @@ var Component = function (_React$Component) {
                 position: popup.position,
                 closeOnOutsideClick: popup.closeOnOutsideClick
             }, function () {
-                _keymaster2.default.setScope('react-popup');
+                _Keymaster2.default.setScope('react-popup');
 
                 if (_this2.props.escToClose) {
-                    (0, _keymaster2.default)('esc', 'react-popup', _this2.handleKeyEvent.bind(_this2, 'cancel', _this2.state.id));
+                    (0, _Keymaster2.default)('esc', 'react-popup', _this2.handleKeyEvent.bind(_this2, 'cancel', _this2.state.id));
                 }
 
                 if (_this2.state.buttons) {
@@ -378,7 +378,7 @@ var Component = function (_React$Component) {
             }
 
             if (code) {
-                (0, _keymaster2.default)(code, 'react-popup', this.handleKeyEvent.bind(this, button, this.state.id));
+                (0, _Keymaster2.default)(code, 'react-popup', this.handleKeyEvent.bind(this, button, this.state.id));
             }
         }
     }, {

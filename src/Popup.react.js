@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import key from 'keymaster';
 import PopupStore from './Store';
 import Header from './Header.react';
 import Footer from './Footer.react';
 import Constants from './Constants';
+import key from './Keymaster';
 
 const defaultKeyFilter = key.filter;
 
