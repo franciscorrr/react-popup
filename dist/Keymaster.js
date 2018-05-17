@@ -60,7 +60,4 @@ var KeymasterMock = function () {
 var isBrowser = typeof window !== 'undefined';
 var key = isBrowser ? require('keymaster') : new KeymasterMock();
 
-console.log('isBrowser', isBrowser);
-console.log('key', key);
-
 exports.default = key;
