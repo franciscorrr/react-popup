@@ -1,20 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const defaultProps = {
-    onClick: () => {},
-    className: 'btn',
-    url: null,
-};
+class PopupAction extends React.Component {
+    static defaultProps = {
+        onClick: () => {},
+        className: 'btn',
+        url: null,
+    };
 
-const propTypes = {
-    onClick: PropTypes.func,
-    className: PropTypes.string,
-    children: PropTypes.node.isRequired,
-    url: PropTypes.string,
-};
-
-class Component extends React.Component {
     handleClick() {
         return this.props.onClick();
     }
@@ -34,8 +27,11 @@ class Component extends React.Component {
     }
 }
 
-Component.displayName = 'PopupAction';
-Component.propTypes = propTypes;
-Component.defaultProps = defaultProps;
+PopupAction.propTypes = {
+    onClick: PropTypes.func,
+    className: PropTypes.string,
+    children: PropTypes.node.isRequired,
+    url: PropTypes.string,
+};
 
-export default Component;
+export default PopupAction;

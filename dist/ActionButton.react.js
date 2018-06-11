@@ -1,85 +1,90 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
+exports.default = void 0;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _react = _interopRequireDefault(require("react"));
 
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
+var _propTypes = _interopRequireDefault(require("prop-types"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var defaultProps = {
-    onClick: function onClick() {},
-    className: 'btn',
-    url: null
-};
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-var propTypes = {
-    onClick: _propTypes2.default.func,
-    className: _propTypes2.default.string,
-    children: _propTypes2.default.node.isRequired,
-    url: _propTypes2.default.string
-};
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-var Component = function (_React$Component) {
-    _inherits(Component, _React$Component);
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-    function Component() {
-        _classCallCheck(this, Component);
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
-        return _possibleConstructorReturn(this, (Component.__proto__ || Object.getPrototypeOf(Component)).apply(this, arguments));
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var PopupAction =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(PopupAction, _React$Component);
+
+  function PopupAction() {
+    _classCallCheck(this, PopupAction);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(PopupAction).apply(this, arguments));
+  }
+
+  _createClass(PopupAction, [{
+    key: "handleClick",
+    value: function handleClick() {
+      return this.props.onClick();
     }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this = this;
 
-    _createClass(Component, [{
-        key: 'handleClick',
-        value: function handleClick() {
-            return this.props.onClick();
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            var _this2 = this;
+      var className = this.props.className;
 
-            var className = this.props.className;
+      if (this.props.url && this.props.url !== '#') {
+        return _react.default.createElement("a", {
+          href: this.props.url,
+          target: "_blank",
+          className: className
+        }, this.props.children);
+      }
 
+      return _react.default.createElement("button", {
+        onClick: function onClick() {
+          return _this.handleClick();
+        },
+        className: className
+      }, this.props.children);
+    }
+  }]);
 
-            if (this.props.url && this.props.url !== '#') {
-                return _react2.default.createElement(
-                    'a',
-                    { href: this.props.url, target: '_blank', className: className },
-                    this.props.children
-                );
-            }
+  return PopupAction;
+}(_react.default.Component);
 
-            return _react2.default.createElement(
-                'button',
-                { onClick: function onClick() {
-                        return _this2.handleClick();
-                    }, className: className },
-                this.props.children
-            );
-        }
-    }]);
+_defineProperty(PopupAction, "defaultProps", {
+  onClick: function onClick() {},
+  className: 'btn',
+  url: null
+});
 
-    return Component;
-}(_react2.default.Component);
-
-Component.displayName = 'PopupAction';
-Component.propTypes = propTypes;
-Component.defaultProps = defaultProps;
-
-exports.default = Component;
+PopupAction.propTypes = {
+  onClick: _propTypes.default.func,
+  className: _propTypes.default.string,
+  children: _propTypes.default.node.isRequired,
+  url: _propTypes.default.string
+};
+var _default = PopupAction;
+exports.default = _default;

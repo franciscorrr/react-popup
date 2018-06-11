@@ -1,25 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ActionButton from './ActionButton.react';
+import { modifier } from './Bem';
 
-export default class ButtonsSpace extends React.Component {
-    static displayName = 'PopupFooterButtons';
-
-    static propTypes = {
-        buttons: PropTypes.arrayOf(PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.object,
-        ])),
-        className: PropTypes.string,
-        onOk: PropTypes.func,
-        onClose: PropTypes.func,
-        buttonClick: PropTypes.func,
-        btnClass: PropTypes.string,
-        wildClasses: PropTypes.bool,
-        defaultOk: PropTypes.string,
-        defaultCancel: PropTypes.string,
-    };
-
+export default class PopupFooterButtons extends React.Component {
     static defaultProps = {
         buttons: null,
         className: null,
@@ -27,7 +11,6 @@ export default class ButtonsSpace extends React.Component {
         onClose: () => {},
         buttonClick: () => {},
         btnClass: null,
-        wildClasses: false,
         defaultOk: null,
         defaultCancel: null,
     };
@@ -42,25 +25,6 @@ export default class ButtonsSpace extends React.Component {
 
     buttonClick(action) {
         return this.props.buttonClick(action);
-    }
-
-    wildClass(className, base) {
-        if (!className) {
-            return null;
-        }
-
-        if (this.props.wildClasses) {
-            return className;
-        }
-
-        const finalClass = [];
-        const classNames = className.split(' ');
-
-        classNames.forEach((singleClass) => {
-            finalClass.push(`${base}--${singleClass}`);
-        });
-
-        return finalClass.join(' ');
     }
 
     render() {
@@ -80,8 +44,10 @@ export default class ButtonsSpace extends React.Component {
                 } else if (btn === 'cancel') {
                     btns.push(<ActionButton className={`${this.props.btnClass} ${this.props.btnClass}--cancel`} key={key} onClick={() => this.onClose()}>{this.props.defaultCancel}</ActionButton>);
                 }
+            } else if (React.isValidElement(btn)) {
+                btns.push(btn);
             } else {
-                const className = `${this.props.btnClass} ${this.wildClass(btn.className, this.props.btnClass)}`;
+                const className = `${this.props.btnClass} ${modifier(btn.className, this.props.btnClass)}`;
                 const btnComponent = (
                     <ActionButton
                         className={className}
@@ -104,3 +70,17 @@ export default class ButtonsSpace extends React.Component {
         );
     }
 }
+
+PopupFooterButtons.propTypes = {
+    buttons: PropTypes.arrayOf(PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.object,
+    ])),
+    className: PropTypes.string,
+    onOk: PropTypes.func,
+    onClose: PropTypes.func,
+    buttonClick: PropTypes.func,
+    btnClass: PropTypes.string,
+    defaultOk: PropTypes.string,
+    defaultCancel: PropTypes.string,
+};
